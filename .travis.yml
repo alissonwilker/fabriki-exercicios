@@ -1,2 +1,4 @@
 language: java
-script: java -cp ./target/classes/ MultiplicacaoMatrizes < entrada.txt
+script: 
+- java -cp ./target/classes/ MultiplicacaoMatrizes < entrada.txt > temp.txt
+- diff temp.txt saida.txt
