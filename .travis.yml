@@ -1,2 +1,2 @@
 language: java
-script: java -cp ./bin/ MultiplicacaoMatrizes < entrada.txt
+script: java -cp ./target/classes/ MultiplicacaoMatrizes < entrada.txt
