@@ -1,0 +1,8 @@
+Digite a qtde. de linhas da Matriz A (maior do que 0):  Digite a qtde. de colunas da Matriz A (maior do que 0):  Digite a qtde. de colunas da Matriz B (maior do que 0):  Preencha os valores da Matriz A.
+Digite o valor da posicao [0][0]: Digite o valor da posicao [0][1]: Digite o valor da posicao [0][2]: Digite o valor da posicao [1][0]: Digite o valor da posicao [1][1]: Digite o valor da posicao [1][2]: Matriz A = 
+{ { 2, 5, 9,}, { 3, 6, 8,}, }
+Preencha os valores da Matriz B.
+Digite o valor da posicao [0][0]: Digite o valor da posicao [0][1]: Digite o valor da posicao [1][0]: Digite o valor da posicao [1][1]: Digite o valor da posicao [2][0]: Digite o valor da posicao [2][1]: Matriz B = 
+{ { 2, 7,}, { 4, 3,}, { 5, 2,}, }
+Matriz AxB = 
+{ { 69, 47,}, { 70, 55,}, }
