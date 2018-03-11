@@ -1,27 +1,31 @@
 public class MultiplicacaoMatrizes {
-    public static void main(String[] args) {
+	
+	public static void main(String[] args) {
+		int linhasA = MatrizesUtil.lerNumeroDeLinhasOuColunasDaMatriz(Matriz.linhas, NomesMatrizes.MATRIZ_A);
+		int colunasA = MatrizesUtil.lerNumeroDeLinhasOuColunasDaMatriz(Matriz.colunas, NomesMatrizes.MATRIZ_A);
+		int linhasB = colunasA;
+		int colunasB = MatrizesUtil.lerNumeroDeLinhasOuColunasDaMatriz(Matriz.colunas, NomesMatrizes.MATRIZ_B);
+		
+		int matrizA[][] = MatrizesUtil.criarMatriz(linhasA, colunasA); 
+		int matrizB[][] = MatrizesUtil.criarMatriz(linhasB, colunasB); 
+		
+		MatrizesUtil.preencherEImprimirMatriz(matrizA, NomesMatrizes.MATRIZ_A);
+		MatrizesUtil.preencherEImprimirMatriz(matrizB, NomesMatrizes.MATRIZ_B);
+		
+		int[][] matrizAxB = multiplicarMatrizes(matrizA, matrizB);
+		MatrizesUtil.imprimirMatriz(matrizAxB, "Matriz AxB");
+	}
 
-        int matrizA1[][] = new int[][] { { 2, 5, 9 }, { 3, 6, 8 } };
-        int matrizB2[][] = { { 2, 7 }, { 4, 3 }, { 5, 2 } };
+	private static int[][] multiplicarMatrizes(int[][] matrizA, int[][] matrizB) {
+		int[][] matrizAxB = MatrizesUtil.criarMatriz(matrizA.length, matrizB[0].length);
+		for (int i = 0; i < matrizA.length; i++) {
+			for (int j = 0; j < matrizB[0].length; j++) {
+				for (int k = 0; k < matrizB.length; k++) {
+					matrizAxB[i][j] += matrizA[i][k] * matrizB[k][j];
+				}
+			}
+		}
+		return matrizAxB;
+	}
 
-        int[][] matrizC3 = new int[matrizA1.length][matrizB2[0].length];
-
-        for (int a = 0; a < matrizA1.length; a++) {
-            for (int b = 0; b < matrizB2[0].length; b++) {
-                for (int c = 0; c < matrizB2.length; c++) {
-
-                    matrizC3[a][b] += matrizA1[a][c] * matrizB2[c][b];
-                }
-            }
-        }
-        System.out.print(" matrizC3 = { ");
-        for (int a = 0; a < matrizC3.length; a++) {
-            System.out.print("{");
-            for (int b = 0; b < matrizC3[0].length; b++) {
-                System.out.print(" " + matrizC3[a][b] + ",");
-            }
-            System.out.print("}, ");
-        }
-        System.out.println("}");
-    }
 }
