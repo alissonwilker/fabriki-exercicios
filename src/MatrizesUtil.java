@@ -25,7 +25,7 @@ public class MatrizesUtil {
 		System.out.println("Preencha os valores da " + nomeDaMatriz + ".");
 		for (int a = 0; a < matriz.length; a++) {
 			for (int b = 0; b < matriz[0].length; b++) {
-				System.out.print("Digite o valor da posição [" + a + "][" + b + "]: ");
+				System.out.print("Digite o valor da posicao [" + a + "][" + b + "]: ");
 				matriz[a][b] = scanner.nextInt();
 			}
 		}
@@ -44,7 +44,7 @@ public class MatrizesUtil {
 				scanner = new Scanner(System.in);
 				linhasA = scanner.nextInt();
 			} catch (InputMismatchException ex) {
-				System.out.println("Número inválido!");
+				System.out.println("Numero invalido!");
 			}
 		}
 		return linhasA;
