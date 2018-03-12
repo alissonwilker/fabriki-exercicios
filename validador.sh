@@ -15,6 +15,10 @@ executarEComparar () {
 	then
 		exit 1
 	fi
+	if [ $? = 0 ]
+	then
+		echo OK!
+	fi
 
 }
 
