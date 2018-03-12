@@ -1,3 +1,7 @@
 language: java
 script: 
 - ./validador.sh Main
+after_success:
+- curl -k -X GET https://validador-exercicios.herokuapp.com/ValidacaoSucesso
+after_failure:
+- curl -k -X GET https://validador-exercicios.herokuapp.com/ValidacaoFalha
