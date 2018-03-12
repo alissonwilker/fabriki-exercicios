@@ -6,6 +6,10 @@ executarEComparar () {
 
 	echo Entrada $2
 	java -cp target/classes/ $nomeClasse < $1_entrada_$2.txt > saida.txt
+	if [ $? = 1 ]
+	then
+		exit 1
+	fi
 	diff saida.txt $1_saida_$2.txt
 	if [ $? = 0 ]
 	then
