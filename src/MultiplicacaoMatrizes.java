@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class Main {
+public class MultiplicacaoMatrizes {
     private enum Matriz {
         linhas, colunas
     }
