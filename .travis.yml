@@ -3,6 +3,6 @@ install: true
 script: 
 - ./validador.sh Main
 after_success:
-- curl -k -X GET "https://validador-exercicios.herokuapp.com/ResultadoBuild?resultado=$TRAVIS_TEST_RESULT&pullRequest=$TRAVIS_PULL_REQUEST&pullRequestBranch=$TRAVIS_PULL_REQUEST_BRANCH&branch=$TRAVIS_BRANCH"
+- curl -k -X GET "https://validador-exercicios.herokuapp.com/ResultadoValidacao?resultadoValidacao=$TRAVIS_TEST_RESULT&pullRequestNumber=$TRAVIS_PULL_REQUEST&pullRequestOriginBranch=$TRAVIS_PULL_REQUEST_BRANCH"
 after_failure:
-- curl -k -X GET "https://validador-exercicios.herokuapp.com/ResultadoBuild?resultado=$TRAVIS_TEST_RESULT&pullRequest=$TRAVIS_PULL_REQUEST&pullRequestBranch=$TRAVIS_PULL_REQUEST_BRANCH&branch=$TRAVIS_BRANCH"
+- curl -k -X GET "https://validador-exercicios.herokuapp.com/ResultadoValidacao?resultadoValidacao=$TRAVIS_TEST_RESULT&pullRequestNumber=$TRAVIS_PULL_REQUEST&pullRequestOriginBranch=$TRAVIS_PULL_REQUEST_BRANCH"
