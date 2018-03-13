@@ -2,5 +2,7 @@ language: java
 install: true
 script: 
 - ./validador.sh Main
-after_script:
+after_success:
+- curl -k -X GET https://validador-exercicios.herokuapp.com/ResultadoBuild?resultado=$TRAVIS_TEST_RESULT
+after_failure:
 - curl -k -X GET https://validador-exercicios.herokuapp.com/ResultadoBuild?resultado=$TRAVIS_TEST_RESULT

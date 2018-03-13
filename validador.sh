@@ -23,6 +23,7 @@ executarEComparar () {
 
 }
 
+mvn compile;
 executarEComparar $nomeClasse 01;
 executarEComparar $nomeClasse 02;
 
