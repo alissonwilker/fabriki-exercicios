@@ -13,7 +13,7 @@ public class LDP7142 {
 		//LEIA UM INTEIRO E ARMAZENE NA VARIÁVEL codigo
 		codigo = entrada.nextInt();
 		numeroHoras = entrada.nextInt();
-		
+		 
 		//PROCESSAMENTO
 		if (numeroHoras > 50) { //SE numeroHoras FOR MAIOR DO QUE 50... 
 			excedente = numeroHoras - 50;

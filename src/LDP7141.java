@@ -13,7 +13,7 @@ public class LDP7141 {
 		//LEIA UM INTEIRO E ARMAZENE NA VARIÁVEL peso
 		peso = entrada.nextInt();
 	
-		//PROCESSAMENTO
+		//PROCESSAMENTO 
 		if (peso > 50) { //SE peso FOR MAIOR DO QUE 50...
 			excedente = peso - 50; //CALCULE excedente
 			multa = excedente * 4; //CALCULE multa
