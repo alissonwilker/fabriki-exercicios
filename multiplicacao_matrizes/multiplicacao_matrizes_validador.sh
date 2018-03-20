@@ -13,6 +13,6 @@ executarEComparar () {
 
 mvn compile;
 cd $EXERCICIO
-executarEComparar $nomeClasse 01;
-executarEComparar $nomeClasse 02;
+executarEComparar $EXERCICIO 01;
+executarEComparar $EXERCICIO 02;
 
