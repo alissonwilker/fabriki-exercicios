@@ -1,7 +1,7 @@
 #!/bin/bash
 set -ev
 
-exercicio=LDP7141
+exercicio="LDP7141"
 
 executarEComparar () {
 
