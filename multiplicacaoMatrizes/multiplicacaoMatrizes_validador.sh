@@ -1,7 +1,7 @@
 #!/bin/bash
 set -ev
 
-EXERCICIO=multiplicacao_matrizes
+EXERCICIO=multiplicacaoMatrizes
 
 executarEComparar () {
 	echo Entrada $2
@@ -13,6 +13,7 @@ executarEComparar () {
 
 mvn compile;
 cd $EXERCICIO
-executarEComparar $EXERCICIO 01;
-executarEComparar $EXERCICIO 02;
-
+for ENTRADA in $(ls | grep entrada | cut -d '_' -f 3 | cut -d '.' -f 1)
+do
+	executarEComparar $EXERCICIO $ENTRADA;
+done
