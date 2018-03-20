@@ -1,0 +1,8 @@
+language: java
+install: true
+script:
+- ./multiplicacao_matrizes/validador.sh Main
+after_success:
+- curl -k -X GET "https://validador-exercicios.herokuapp.com/ResultadoValidacao?resultadoValidacao=$TRAVIS_TEST_RESULT&pullRequestNumber=$TRAVIS_PULL_REQUEST&pullRequestOriginBranch=$TRAVIS_PULL_REQUEST_BRANCH"
+after_failure:
+- curl -k -X GET "https://validador-exercicios.herokuapp.com/ResultadoValidacao?resultadoValidacao=$TRAVIS_TEST_RESULT&pullRequestNumber=$TRAVIS_PULL_REQUEST&pullRequestOriginBranch=$TRAVIS_PULL_REQUEST_BRANCH"
