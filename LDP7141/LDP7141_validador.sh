@@ -1,18 +1,18 @@
 #!/bin/bash
 set -ev
 
-exercicio="LDP7141"
+EXERCICIO=LDP7141
 
 executarEComparar () {
-
 	echo Entrada $1
-	java -cp target/classes/ Main < $exercicio_entrada_$1.txt > saida.txt
-	diff saida.txt $exercicio_saida_$1.txt
+	java -cp ../target/classes/ Main < $1_entrada_$2.txt > saida.txt
+	diff saida.txt $1_saida_$2.txt
 	echo OK!
 
 }
 
 mvn compile;
-executarEComparar 01;
-executarEComparar 02;
-executarEComparar 03;
+cd $EXERCICIO
+executarEComparar $EXERCICIO 01;
+executarEComparar $EXERCICIO 02;
+executarEComparar $EXERCICIO 03;
