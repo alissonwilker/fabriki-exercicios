@@ -1,5 +1,4 @@
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
@@ -87,17 +86,6 @@ public class ContaBancariaTest {
     }
 
     /**
-     * Testa se os identificadores (ids) das contas bancárias estão sendo atribuídos corretamente.
-     */
-    @Test
-    void testIdentificador() {
-        ContaBancaria contaBancaria = new ContaBancaria(pessoaFisica);
-
-        ContaBancaria novaContaBancaria = new ContaBancaria(pessoaJuridica);
-        assertEquals(contaBancaria.getId() + 1, novaContaBancaria.getId());
-    }
-
-    /**
      * Testa a associação de conta bancária com cliente e vice-versa.
      */
     @Test
@@ -105,19 +93,9 @@ public class ContaBancariaTest {
         ContaBancaria contaBancaria = new ContaBancaria(pessoaFisica);
 
         assertEquals(contaBancaria.getCliente(), pessoaFisica);
-        assertTrue(pessoaFisica.getContasBancarias().contains(contaBancaria));
-        assertEquals(1, pessoaFisica.getContasBancarias().size());
 
-        ContaBancaria novaContaBancaria = new ContaBancaria(pessoaFisica);
+        ContaBancaria novaContaBancaria = new ContaBancaria(pessoaJuridica);
 
-        assertEquals(novaContaBancaria.getCliente(), pessoaFisica);
-        assertTrue(pessoaFisica.getContasBancarias().contains(novaContaBancaria));
-        assertEquals(2, pessoaFisica.getContasBancarias().size());
-
-        ContaBancaria outraContaBancaria = new ContaBancaria(pessoaJuridica);
-
-        assertEquals(outraContaBancaria.getCliente(), pessoaJuridica);
-        assertTrue(pessoaJuridica.getContasBancarias().contains(outraContaBancaria));
-        assertEquals(1, pessoaJuridica.getContasBancarias().size());
+        assertEquals(novaContaBancaria.getCliente(), pessoaJuridica);
     }
 }
