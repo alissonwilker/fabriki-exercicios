@@ -1,0 +1,12 @@
+language: java
+install: true
+script: 
+- echo $TRAVIS_BUILD_NUMBER
+- echo $TRAVIS_BUILD_ID
+- echo $TRAVIS_JOB_ID
+- echo $TRAVIS_JOB_NUMBER
+- ./validador.sh
+after_success:
+- curl -k -X GET "https://validador-exercicios.herokuapp.com/ResultadoValidacao?resultadoValidacao=$TRAVIS_TEST_RESULT&pullRequestNumber=$TRAVIS_PULL_REQUEST&pullRequestOriginBranch=$TRAVIS_PULL_REQUEST_BRANCH"
+after_failure:
+- curl -k -X GET "https://validador-exercicios.herokuapp.com/ResultadoValidacao?resultadoValidacao=$TRAVIS_TEST_RESULT&pullRequestNumber=$TRAVIS_PULL_REQUEST&pullRequestOriginBranch=$TRAVIS_PULL_REQUEST_BRANCH"
