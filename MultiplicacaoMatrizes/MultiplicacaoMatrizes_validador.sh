@@ -1,7 +1,7 @@
 #!/bin/bash
 set -ev
 
-EXERCICIO=multiplicacaoMatrizes
+EXERCICIO=MultiplicacaoMatrizes
 
 executarEComparar () {
 	echo Entrada $2
