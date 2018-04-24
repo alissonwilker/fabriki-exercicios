@@ -1,0 +1,8 @@
+language: java
+install: true
+script:
+- ./ContaBancaria/ContaBancaria_validador.sh
+after_success:
+- curl -k -X GET "http://www.fabriki.org/ResultadoValidacao?envioRef=c63cac54-ca2d-4a07-88e7-c152aac10f02&resultadoValidacao=$TRAVIS_TEST_RESULT&pullRequestNumber=$TRAVIS_PULL_REQUEST&pullRequestOriginBranch=$TRAVIS_PULL_REQUEST_BRANCH&travisBuildId=$TRAVIS_BUILD_ID"
+after_failure:
+- curl -k -X GET "http://www.fabriki.org/ResultadoValidacao?envioRef=c63cac54-ca2d-4a07-88e7-c152aac10f02&resultadoValidacao=$TRAVIS_TEST_RESULT&pullRequestNumber=$TRAVIS_PULL_REQUEST&pullRequestOriginBranch=$TRAVIS_PULL_REQUEST_BRANCH&travisBuildId=$TRAVIS_BUILD_ID"
