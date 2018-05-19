@@ -1,6 +1,6 @@
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.Assert.assertEquals;
 
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
 /**
  * Classe de teste para a classe ContaBancaria.
@@ -21,7 +21,7 @@ public class ContaBancariaTest {
      * Testa se o saldo está sendo retornado corretamente.
      */
     @Test
-    void testGetSaldo() {
+    public void testGetSaldo() {
         ContaBancaria contaBancaria = new ContaBancaria(pessoaFisica);
 
         assertEquals(0, contaBancaria.getSaldo());
@@ -31,7 +31,7 @@ public class ContaBancariaTest {
      * Testa um depósito com valor positivo.
      */
     @Test
-    void testDepositarPositivo() {
+    public void testDepositarPositivo() {
         ContaBancaria contaBancaria = new ContaBancaria(pessoaJuridica);
 
         int valorDeposito = 20;
@@ -44,7 +44,7 @@ public class ContaBancariaTest {
      * Testa um depósito com valor negativo.
      */
     @Test
-    void testDepositarNegativo() {
+    public void testDepositarNegativo() {
         ContaBancaria contaBancaria = new ContaBancaria(pessoaJuridica);
 
         int valorDeposito = -20;
@@ -57,7 +57,7 @@ public class ContaBancariaTest {
      * Testa o caso de tentar sacar um valor maior do que o saldo.
      */
     @Test
-    void testSacarMaiorQueSaldo() {
+    public void testSacarMaiorQueSaldo() {
         ContaBancaria contaBancaria = new ContaBancaria(pessoaFisica);
 
         int valorDeposito = 10;
@@ -73,7 +73,7 @@ public class ContaBancariaTest {
      * Testa o caso de tentar sacar um valor menor do que o saldo.
      */
     @Test
-    void testSacarMenorQueSaldo() {
+    public void testSacarMenorQueSaldo() {
         ContaBancaria contaBancaria = new ContaBancaria(pessoaFisica);
 
         int valorDeposito = 20;
@@ -89,7 +89,7 @@ public class ContaBancariaTest {
      * Testa a associação de conta bancária com cliente e vice-versa.
      */
     @Test
-    void testCliente() {
+    public void testCliente() {
         ContaBancaria contaBancaria = new ContaBancaria(pessoaFisica);
 
         assertEquals(contaBancaria.getCliente(), pessoaFisica);
