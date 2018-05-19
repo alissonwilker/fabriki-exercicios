@@ -24,7 +24,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 @RunWith(Arquillian.class)
 public abstract class AbstractIntegrationTest {
     private static final String FORM_TAG = "form";
-    private static final String APP_CONTEXT_ROOT = "ContaBancariaWeb";
+    private static final String APP_CONTEXT_ROOT = "fabriki-exercicios";
     private static final String ID_RESPOSTA = "resposta";
     private static final int WAIT_TIMEOUT = 10;
 
