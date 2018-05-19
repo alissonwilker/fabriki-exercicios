@@ -1,10 +1,11 @@
 #!/bin/bash
-set -ev
+
+source ./resources/scripts/infra_testes.sh
 
 EXERCICIO=ContaBancariaWeb
 
-mkdir -p src/test/java/
 cp ./$EXERCICIO/ContaBancariaTest.java src/test/java/
 cp ./$EXERCICIO/ContaBancariaWebITCase.java src/integration-test/java/
+cp ./$EXERCICIO/index.html src/main/webapp/
 
-mvn clean install verify -P wildfly-managed;
+executarTestesIntegracao;

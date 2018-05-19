@@ -1,8 +1,9 @@
 #!/bin/bash
-set -ev
+
+source ./resources/scripts/infra_testes.sh
 
 EXERCICIO=ContaBancaria
 
-mkdir -p src/test/java/
 cp ./$EXERCICIO/ContaBancariaTest.java src/test/java/
-mvn clean test;
+
+executarTestesUnitarios;
