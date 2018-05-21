@@ -1,6 +1,6 @@
 set -ev
 
-PROFILE_WILDFLY_MANAGED="-P wildfly_managed"
+PROFILE_WILDFLY_MANAGED="-P wildfly-managed"
 
 mkdir -p src/test/java/
 mkdir -p src/main/resources/
