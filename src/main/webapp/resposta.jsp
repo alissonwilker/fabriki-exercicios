@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Resposta do Teste de Integração</title>
+<title>Resposta</title>
 </head>
 <body id="resposta">
 	${resposta}
