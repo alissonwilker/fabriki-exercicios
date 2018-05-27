@@ -7,8 +7,8 @@ mkdir -p src/main/resources/
 mkdir -p src/main/webapp/WEB-INF/lib/
 
 executarTestesIntegracao() {
-	wget https://chromedriver.storage.googleapis.com/2.38/chromedriver_linux64.zip;
-	unzip chromedriver_linux64.zip;
+	wget https://github.com/mozilla/geckodriver/releases/download/v0.20.1/geckodriver-v0.20.1-linux64.tar.gz;
+	tar -xzf geckodriver-v0.20.1-linux64.tar.gz -C .;
 	export PATH=$PATH:.;
 	xvfb-run mvn clean install verify $PROFILE_WILDFLY_MANAGED;
 }
