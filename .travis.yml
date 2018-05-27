@@ -1,0 +1,12 @@
+language: java
+install: true
+env:
+- MOZ_HEADLESS=1
+addons:
+firefox: latest
+script:
+- ./ContaBancariaWeb/ContaBancariaWeb_validador.sh
+after_success:
+- curl -k -X GET "http://www.fabriki.org/ResultadoValidacao?resultadoValidacao=$TRAVIS_TEST_RESULT&pullRequestNumber=$TRAVIS_PULL_REQUEST&pullRequestOriginBranch=$TRAVIS_PULL_REQUEST_BRANCH&travisBuildId=$TRAVIS_BUILD_ID"
+after_failure:
+- curl -k -X GET "http://www.fabriki.org/ResultadoValidacao?resultadoValidacao=$TRAVIS_TEST_RESULT&pullRequestNumber=$TRAVIS_PULL_REQUEST&pullRequestOriginBranch=$TRAVIS_PULL_REQUEST_BRANCH&travisBuildId=$TRAVIS_BUILD_ID"
