@@ -1,0 +1,1 @@
+public interface LDP71412{}
