@@ -4,6 +4,6 @@ source ./resources/scripts/infra_testes.sh
 
 EXERCICIO=ContaBancariaWebStateful
 
-cp -R ./$EXERCICIO/src/ src/
+cp -R ./$EXERCICIO/src/ ./
 
 executarTestesIntegracao;
