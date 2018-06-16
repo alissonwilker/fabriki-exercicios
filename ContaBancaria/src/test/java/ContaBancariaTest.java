@@ -2,7 +2,7 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-/**
+/** 
  * Classe de teste para a classe ContaBancaria.
  *
  */
@@ -97,5 +97,16 @@ public class ContaBancariaTest {
         ContaBancaria novaContaBancaria = new ContaBancaria(pessoaJuridica);
 
         assertEquals(pessoaJuridica, novaContaBancaria.getCliente());
+    }
+    
+    /**
+     * Testa se o id da conta bancaria esta sendo configurado corretamente.
+     */
+    @Test
+    public void testGetId() {
+        ContaBancaria contaBancaria = new ContaBancaria(pessoaFisica);
+        ContaBancaria novaContaBancaria = new ContaBancaria(pessoaJuridica);
+        
+        assertEquals(1, novaContaBancaria.getId() - contaBancaria.getId());
     }
 }
