@@ -16,3 +16,19 @@ executarTestesIntegracao() {
 executarTestesUnitarios() {
 	mvn clean test;
 }
+
+executarEComparar() {
+	echo Entrada $2
+	java -cp ../target/classes/ $1 < $1_entrada_$2.txt > saida.txt
+	diff saida.txt $1_saida_$2.txt
+	echo OK!
+}
+
+executarTestesEntradaESaida() {
+	mvn compile;
+	cd $1
+	for ENTRADA in $(ls | grep entrada | cut -d '_' -f 3 | cut -d '.' -f 1)
+	do
+		executarEComparar $1 $ENTRADA;
+	done
+}
