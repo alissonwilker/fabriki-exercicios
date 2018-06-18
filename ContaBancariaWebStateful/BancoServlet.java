@@ -136,6 +136,17 @@ public class BancoServlet extends HttpServlet {
         return criarRetornoOperacaoBancaria(cpf);
     }
 
+    /**
+     * Recupera o nome do cliente (dono) da conta bancaria especificada em uma requisicao. A conta
+     * bancaria deve estar presente na sessao do usuario e esta deve ser recuperada atraves do metodo
+     * 'BancoServlet.recuperarContaBancaria(HttpServletRequest)'.
+     * 
+     * @param request
+     *            O objeto HttpServletRequest a partir do qual pode ser recuperada a sessao do usuario
+     *            e, consequentemente, as contas vinculadas a esse usuario.
+     * @return O nome do cliente (dono) da conta bancaria presente na requisicao. Se a conta nao estiver
+     *         presente na sessao do usuario, o resultado eh uma string vazia.
+     */
     private String recuperarNomeCliente(HttpServletRequest request) {
         // TODO IMPLEMENTE O CODIGO DESTE METODO.
     }
