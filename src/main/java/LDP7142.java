@@ -1,0 +1,30 @@
+import java.io.PrintStream;
+import java.util.Scanner;
+
+public class LDP7142 {
+	public static Scanner entrada = new Scanner (System.in);
+	
+
+	public static void main(String[] args) {
+		int codigo = 0, horas = 0, excedente = 0, salarioExcedente = 0, salari = 0, salarioTotal = 0;
+		
+		codigo = entrada.nextInt();
+		horas = entrada.nextInt();
+		
+		if (horas > 50){
+			excedente = horas - 50;
+			salarioExcedente = excedente * 20;
+			salari = 50 * 10;
+			salarioTotal = salari + salarioExcedente;
+		}else{
+			salari = horas * 10;
+		}
+		
+		System.out.println("codigo = " + codigo);
+		System.out.println("salarioExcedente = " + salarioExcedente);
+		System.out.println("salarioTotal = " + salarioTotal);
+				
+
+	}
+
+}
