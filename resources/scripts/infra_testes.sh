@@ -25,7 +25,7 @@ executarEComparar() {
 }
 
 executarTestesEntradaESaida() {
-	mvn compile -Dmaven.test.skip=true;
+	mvn compile -Dmaven.test.skip=true -Dmaven.javadoc.skip=true;
 	cd $1
 	for ENTRADA in $(ls | grep entrada | cut -d '_' -f 3 | cut -d '.' -f 1)
 	do
