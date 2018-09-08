@@ -13,7 +13,7 @@ executarTestesIntegracao() {
 	xvfb-run mvn clean install verify $PROFILE_WILDFLY_MANAGED;
 }
 
-executarTestesUnitarios() {
+executarTestesUnitarios() { 
 	mvn clean test;
 }
 
