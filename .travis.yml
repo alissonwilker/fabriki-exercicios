@@ -1,0 +1,15 @@
+language: java
+install: true
+env:
+- MOZ_HEADLESS=1
+addons:
+firefox: latest
+script:
+- ./LDP7144/LDP7144_validador.sh
+cache:
+  directories:
+  - $HOME/.m2
+after_success:
+- curl -k -X GET "http://www.fabriki.org/ResultadoValidacao?resultadoValidacao=$TRAVIS_TEST_RESULT&pullRequestNumber=$TRAVIS_PULL_REQUEST&pullRequestOriginBranch=$TRAVIS_PULL_REQUEST_BRANCH&travisBuildId=$TRAVIS_BUILD_ID"
+after_failure:
+- curl -k -X GET "http://www.fabriki.org/ResultadoValidacao?resultadoValidacao=$TRAVIS_TEST_RESULT&pullRequestNumber=$TRAVIS_PULL_REQUEST&pullRequestOriginBranch=$TRAVIS_PULL_REQUEST_BRANCH&travisBuildId=$TRAVIS_BUILD_ID"
