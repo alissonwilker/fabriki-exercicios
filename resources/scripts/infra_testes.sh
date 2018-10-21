@@ -1,4 +1,5 @@
-set -ev
+#set -ev
+set -e
 
 PROFILE_WILDFLY_MANAGED="-P wildfly-managed"
 

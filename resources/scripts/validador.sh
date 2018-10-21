@@ -8,9 +8,6 @@ EXERCICIO=$3
 
 if [ $FILES_ZIP_URL ]; then
   curl -o files.zip -L $1;
-#  wget -o files.zip $1;
-#  ls -lha;
-#  zip -sf files.zip;
   unzip files.zip;
 fi
 
