@@ -1,5 +1,5 @@
 #set -ev
-set -e
+#set -e
 
 PROFILE_WILDFLY_MANAGED="-P wildfly-managed"
 
@@ -11,15 +11,27 @@ executarEComparar() {
 	echo Entrada $2
 	java -cp ./target/classes/ $1 < $1_entrada_$2.txt > saida.txt
 	diff saida.txt $1_saida_$2.txt
-	echo OK!
+	return $?
 }
 
 executarTestesEntradaESaida() {
-	mvn -e -X -V compile -Dmaven.test.skip=true -Dmaven.javadoc.skip=true;
+	mvn -e -V compile -Dmaven.test.skip=true -Dmaven.javadoc.skip=true;
+	ARRAY=()
+	CONTADOR=0
 	for ENTRADA in $(ls | grep entrada | cut -d '_' -f 3 | cut -d '.' -f 1)
 	do
 		executarEComparar $1 $ENTRADA;
+		RESULTADO=$?
+		if [ $RESULTADO -eq 0 ]; then
+			echo CORRETO.
+			ARRAY+=($RESULTADO)
+		else 
+			echo INCORRETO.
+		fi
+		CONTADOR=$(($CONTADOR+1))
 	done
+	EXERCICIOS_CORRETOS=${#ARRAY[@]}
+	echo 1 $EXERCICIOS_CORRETOS CORRETOS DE $CONTADOR EXERCICIOS.
 }
 
 executarTestesIntegracao() {
