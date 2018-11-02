@@ -16,8 +16,9 @@ executarEComparar() {
 
 executarTestesEntradaESaida() {
 	mvn -e -V compile -Dmaven.test.skip=true -Dmaven.javadoc.skip=true;
+	echo OK2 $CONTADOR_EXERCICIOS
+	echo OK2 $EXERCICIOS_CORRETOS
 	ARRAY=()
-	CONTADOR=0
 	for ENTRADA in $(ls | grep entrada | cut -d '_' -f 3 | cut -d '.' -f 1)
 	do
 		executarEComparar $1 $ENTRADA;
@@ -28,10 +29,10 @@ executarTestesEntradaESaida() {
 		else 
 			echo INCORRETO.
 		fi
-		CONTADOR=$(($CONTADOR+1))
+		CONTADOR_EXERCICIOS=$(($CONTADOR_EXERCICIOS+1))
 	done
 	EXERCICIOS_CORRETOS=${#ARRAY[@]}
-	echo 1 $EXERCICIOS_CORRETOS CORRETOS DE $CONTADOR EXERCICIOS.
+	echo 1 $EXERCICIOS_CORRETOS CORRETOS DE $CONTADOR_EXERCICIOS EXERCICIOS.
 }
 
 executarTestesIntegracao() {
