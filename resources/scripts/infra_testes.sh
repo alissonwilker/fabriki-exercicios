@@ -16,7 +16,7 @@ executarEComparar() {
 
 executarTestesEntradaESaida() {
 	mvn -e -V compile -Dmaven.test.skip=true -Dmaven.javadoc.skip=true;
-	if [ "$?" -ne "0" ]; then
+	if [ $? -ne 0 ]; then
 		RESULTADO_TESTES=2
 		return $RESULTADO_TESTES
 	fi
