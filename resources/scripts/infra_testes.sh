@@ -16,6 +16,10 @@ executarEComparar() {
 
 executarTestesEntradaESaida() {
 	mvn -e -V compile -Dmaven.test.skip=true -Dmaven.javadoc.skip=true;
+	RESULTADO_COMPILACAO=$?
+	if [ $RESULTADO_COMPILACAO -ne 0 ]; then
+		exit $RESULTADO_COMPILACAO
+	fi
 	echo OK2 $CONTADOR_EXERCICIOS
 	echo OK2 $EXERCICIOS_CORRETOS
 	ARRAY=()
