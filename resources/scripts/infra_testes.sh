@@ -42,5 +42,19 @@ executarTestesIntegracao() {
 }
 
 executarTestesUnitarios() {
-	mvn clean test;
+	mvn compile
+	if [ "$?" -ne 0 ]; then
+		RESULTADO_TESTES=2
+		return $RESULTADO_TESTES
+	fi
+	mvn test 1> log.txt
+	RESULTADO_TESTES=$?
+	cat log.txt
+	TESTS_RUN=`grep "Tests run" log.txt | tail -1 | cut -d ' ' -f 3,5,7 | sed 's/,//g'`
+	ARRAY=($TESTS_RUN)
+	CONTADOR_EXERCICIOS=${ARRAY[0]}
+	TEST_FAILURES=${ARRAY[1]}
+	TEST_ERRORS=${ARRAY[2]}
+	EXERCICIOS_CORRETOS=$(($CONTADOR_EXERCICIOS-($TEST_FAILURES+$TEST_ERRORS)))
+	return $RESULTADO_TESTES
 }
