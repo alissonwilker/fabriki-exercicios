@@ -1,5 +1,3 @@
-#set -ev
-#set -e
 
 PROFILE_WILDFLY_MANAGED="-P wildfly-managed"
 
@@ -20,8 +18,6 @@ executarTestesEntradaESaida() {
 		RESULTADO_TESTES=2
 		return $RESULTADO_TESTES
 	fi
-	echo OK2 $CONTADOR_EXERCICIOS
-	echo OK2 $EXERCICIOS_CORRETOS
 	ARRAY=()
 	for ENTRADA in $(ls | grep entrada | cut -d '_' -f 3 | cut -d '.' -f 1)
 	do
@@ -36,7 +32,6 @@ executarTestesEntradaESaida() {
 		CONTADOR_EXERCICIOS=$(($CONTADOR_EXERCICIOS+1))
 	done
 	EXERCICIOS_CORRETOS=${#ARRAY[@]}
-	echo 1 $EXERCICIOS_CORRETOS CORRETOS DE $CONTADOR_EXERCICIOS EXERCICIOS.
 }
 
 executarTestesIntegracao() {
