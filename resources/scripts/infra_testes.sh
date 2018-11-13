@@ -47,13 +47,11 @@ executarTestesIntegracao() {
 	RESULTADO_TESTES=$?
 	cat log.txt
 	TESTS_RUN=`grep "Tests run" log.txt | tail -1 | cut -d ' ' -f 3,5,7 | sed 's/,//g'`
-	if [ ! -z "$TESTS_RUN" ]; then
-		ARRAY=($TESTS_RUN)
-		TOTAL_TESTES=${ARRAY[0]}
-		TEST_FAILURES=${ARRAY[1]}
-		TEST_ERRORS=${ARRAY[2]}
-		TESTES_SUCESSO=$(($TOTAL_TESTES-($TEST_FAILURES+$TEST_ERRORS)))
-	fi
+	ARRAY=($TESTS_RUN)
+	TOTAL_TESTES=${ARRAY[0]}
+	TEST_FAILURES=${ARRAY[1]}
+	TEST_ERRORS=${ARRAY[2]}
+	TESTES_SUCESSO=$(($TOTAL_TESTES-($TEST_FAILURES+$TEST_ERRORS)))
 	return $RESULTADO_TESTES
 }
 
@@ -67,12 +65,10 @@ executarTestesUnitarios() {
 	RESULTADO_TESTES=$?
 	cat log.txt
 	TESTS_RUN=`grep "Tests run" log.txt | tail -1 | cut -d ' ' -f 3,5,7 | sed 's/,//g'`
-	if [ ! -z "$TESTS_RUN" ]; then
-		ARRAY=($TESTS_RUN)
-		TOTAL_TESTES=${ARRAY[0]}
-		TEST_FAILURES=${ARRAY[1]}
-		TEST_ERRORS=${ARRAY[2]}
-		TESTES_SUCESSO=$(($TOTAL_TESTES-($TEST_FAILURES+$TEST_ERRORS)))
-	fi
+	ARRAY=($TESTS_RUN)
+	TOTAL_TESTES=${ARRAY[0]}
+	TEST_FAILURES=${ARRAY[1]}
+	TEST_ERRORS=${ARRAY[2]}
+	TESTES_SUCESSO=$(($TOTAL_TESTES-($TEST_FAILURES+$TEST_ERRORS)))
 	return $RESULTADO_TESTES
 }
