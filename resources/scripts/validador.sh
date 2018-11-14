@@ -11,7 +11,7 @@ if [ "$RESULTADO_TESTES" -eq 2 ]; then
 	return $RESULTADO_TESTES;
 fi
 
-if [ "$TESTES_SUCESSO" -eq "$TOTAL_TESTES" ]; then
+if [ "$TESTES_SUCESSO" -eq "$TOTAL_TESTES" ] && [ "$TESTES_SUCESSO" -gt 0 ]; then
 	RESULTADO_TESTES=0
 	return $RESULTADO_TESTES
 else
