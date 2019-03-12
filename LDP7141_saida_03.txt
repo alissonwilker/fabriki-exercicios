@@ -1,0 +1,2 @@
+excedente = 0
+multa = 0
