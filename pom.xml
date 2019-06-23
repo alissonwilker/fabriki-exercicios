@@ -39,6 +39,14 @@
 	</dependencyManagement>
 
 	<dependencies>
+		<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.jaxrs/jackson-jaxrs-json-provider -->
+		<dependency>
+			<groupId>com.fasterxml.jackson.jaxrs</groupId>
+			<artifactId>jackson-jaxrs-json-provider</artifactId>
+			<version>${jackson-jaxrs.version}</version>
+			<scope>test</scope>
+		</dependency>
+
 		<dependency>
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
@@ -225,6 +233,7 @@
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
 		<!-- versoes das dependencias -->
+		<jackson-jaxrs.version>2.9.9</jackson-jaxrs.version>
 		<hibernate.version>5.2.2.Final</hibernate.version>
 		<h2database.version>1.4.194</h2database.version>
 		<wildfly.version>11.0.0.CR1</wildfly.version>
