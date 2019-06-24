@@ -1,0 +1,276 @@
+package xadrez.movimentos;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import xadrez.Xadrez;
+import xadrez.pecas.Peca;
+import xadrez.pecas.Peca.Cor;
+
+public abstract class Movimento {
+    public enum Tipo {
+        Restrito, VerticalLivre, HorizontalLivre, DiagonalLivre, L, AvancaUma, CapturaDiagonal, AvancaDuas, EnPassant, Promover, Roque;
+    }
+
+    private Tipo tipo;
+
+    boolean deslocaLinhas = false;
+    boolean deslocaColunas = false;
+    
+    public static MovimentoDiagonalLivre criarMovimentoDiagonalLivre() {
+        return new MovimentoDiagonalLivre();
+    }
+
+    public static MovimentoHorizontalLivre criarMovimentoHorizontalLivre() {
+        return new MovimentoHorizontalLivre();
+    }
+    
+    public static MovimentoL criarMovimentoL() {
+        return new MovimentoL();
+    }
+    
+    public static MovimentoRestrito criarMovimentoRestrito() {
+        return new MovimentoRestrito();
+    }
+    
+    public static MovimentoVerticalLivre criarMovimentoVerticalLivre() {
+        return new MovimentoVerticalLivre();
+    }
+    
+    public Movimento(Tipo tipo) {
+        this.tipo = tipo;
+    }
+
+    public Tipo getTipo() {
+        return tipo;
+    }
+
+    public boolean validar(String idCasaOrigem, String idCasaDestino, Xadrez xadrez) {
+        boolean causaXequeAmigo = false;
+        boolean deslocamentoValido = false;
+        boolean casaDestinoValida = validarCasaDestinoMovimento(idCasaOrigem, idCasaDestino, xadrez);
+
+        if (casaDestinoValida) {
+            deslocamentoValido = validarDeslocamento(idCasaOrigem, idCasaDestino, xadrez);
+            if (deslocamentoValido) {
+                causaXequeAmigo = verificarXequeAmigo(idCasaOrigem, idCasaDestino, xadrez);
+            }
+        }
+
+        return casaDestinoValida && deslocamentoValido && !causaXequeAmigo;
+    }
+
+    public boolean validarCasaDestinoMovimento(String idCasaOrigem, String idCasaDestino, Xadrez xadrez) {
+        Peca pecaOrigem = xadrez.get(idCasaOrigem);
+        Peca pecaDestino = xadrez.get(idCasaDestino);
+        return pecaDestino == null || pecaOrigem.getCor() != pecaDestino.getCor();
+    }
+
+    private boolean verificarXequeAmigo(String idCasaOrigem, String idCasaDestino, Xadrez xadrez) {
+        Peca pecaOrigem = xadrez.get(idCasaOrigem);
+
+        xadrez.moverPeca(idCasaOrigem + idCasaDestino);
+        boolean xequeAmigo = xadrez.analisarXeque(pecaOrigem.getCor());
+        xadrez.retornarEstadoAnterior();
+        return xequeAmigo;
+    }
+
+    public boolean verificarObstrucaoDeslocamento(String idCasaOrigem, String idCasaDestino, Xadrez xadrez) {
+        List<String> casasIntermediarias = getCasasIntermediarias(idCasaOrigem, idCasaDestino, xadrez);
+        for (String idCasaIntermediaria : casasIntermediarias) {
+            Peca pecaObstrucao = xadrez.get(idCasaIntermediaria);
+            if (pecaObstrucao != null) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public boolean validarDeslocamento(String idCasaOrigem, String idCasaDestino, Xadrez xadrez) {
+        int distanciaColunas = xadrez.calcularDistanciaColunas(idCasaOrigem, idCasaDestino);
+        int distanciaLinhas = xadrez.calcularDistanciaLinhas(idCasaOrigem, idCasaDestino);
+
+        if (!validarDistanciasColunasLinhas(distanciaColunas, distanciaLinhas)) {
+            return false;
+        }
+
+        return !verificarObstrucaoDeslocamento(idCasaOrigem, idCasaDestino, xadrez);
+    }
+
+    protected abstract boolean validarDistanciasColunasLinhas(int distanciaColunas, int distanciaLinhas);
+
+    public List<String> getMovimentosValidos(String idCasaOrigem, Xadrez xadrez) {
+        List<String> movimentosValidos = new ArrayList<>();
+
+        Peca pecaOrigem = xadrez.get(idCasaOrigem);
+        Cor corPecaOrigem = pecaOrigem.getCor();
+
+        int[] colunas = getColunasMovimentos(corPecaOrigem);
+        int[] linhas = getLinhasMovimentos(corPecaOrigem);
+
+        for (int i = 0; i < linhas.length; i++) {
+            String idCasaDestino = xadrez.getIdCasa(idCasaOrigem, colunas[i], linhas[i]);
+            if (idCasaDestino != null && validar(idCasaOrigem, idCasaDestino, xadrez)) {
+                movimentosValidos.add(idCasaOrigem + idCasaDestino);
+            }
+        }
+
+        return movimentosValidos;
+    }
+
+    protected abstract int[] getLinhasMovimentos(Cor corPecaOrigem);
+
+    protected abstract int[] getColunasMovimentos(Cor corPecaOrigem);
+
+    public List<String> getCasasIntermediarias(String idCasaOrigem, String idCasaDestino, Xadrez xadrez) {
+        List<String> casasIntermediarias = new ArrayList<>();
+        int distanciaLinhas = xadrez.calcularDistanciaLinhas(idCasaOrigem, idCasaDestino);
+        int distanciaColunas = xadrez.calcularDistanciaColunas(idCasaOrigem, idCasaDestino);
+
+        int linhaOrigem = xadrez.getOrdemLinha(idCasaOrigem);
+        int linhaDestino = xadrez.getOrdemLinha(idCasaDestino);
+        int colunaOrigem = xadrez.getOrdemColuna(idCasaOrigem);
+        int colunaDestino = xadrez.getOrdemColuna(idCasaDestino);
+
+        int offsetLinha = distanciaLinhas == 0 ? 0 : (linhaDestino - linhaOrigem) > 0 ? 1 : -1;
+        int offsetColuna = distanciaColunas == 0 ? 0 : (colunaDestino - colunaOrigem) > 0 ? 1 : -1;
+        for (int i = 1; i < (deslocaLinhas ? distanciaLinhas : distanciaColunas); i++) {
+            colunaOrigem += offsetColuna;
+            linhaOrigem += offsetLinha;
+            casasIntermediarias.add(xadrez.getIdCasa(colunaOrigem, linhaOrigem));
+        }
+        return casasIntermediarias;
+    }
+
+}
+
+class MovimentoDiagonalLivre extends Movimento {
+    public MovimentoDiagonalLivre() {
+        super(Tipo.DiagonalLivre);
+        deslocaLinhas = true;
+        deslocaColunas = true;
+    }
+
+    @Override
+    protected boolean validarDistanciasColunasLinhas(int distanciaColunas, int distanciaLinhas) {
+        return distanciaColunas == distanciaLinhas;
+    }
+
+    @Override
+    protected int[] getLinhasMovimentos(Cor corPecaOrigem) {
+        return new int[] { 1, 2, 3, 4, 5, 6, 7, 1, 2, 3, 4, 5, 6, 7, -1, -2, -3, -4, -5, -6, -7, -1, -2, -3, -4, -5, -6,
+        -7 };
+    }
+
+    @Override
+    protected int[] getColunasMovimentos(Cor corPecaOrigem) {
+        return new int[] { 1, 2, 3, 4, 5, 6, 7, -1, -2, -3, -4, -5, -6, -7, 1, 2, 3, 4, 5, 6, 7, -1, -2, -3, -4, -5, -6,
+        -7 };
+    }
+}
+
+class MovimentoHorizontalLivre extends Movimento {
+    public MovimentoHorizontalLivre() {
+        super(Tipo.HorizontalLivre);
+        deslocaLinhas = false;
+        deslocaColunas = true;
+    }
+
+    @Override
+    protected boolean validarDistanciasColunasLinhas(int distanciaColunas, int distanciaLinhas) {
+        return distanciaLinhas == 0;
+    }
+
+    @Override
+    protected int[] getLinhasMovimentos(Cor corPecaOrigem) {
+        return new int[]  { 0, 0, 0, 0, 0, 0, 0,  0,  0,  0,  0,  0,  0,  0 };
+    }
+
+    @Override
+    protected int[] getColunasMovimentos(Cor corPecaOrigem) {
+        return new int[] { 1, 2, 3, 4, 5, 6, 7, -1, -2, -3, -4, -5, -6, -7 };
+    }
+
+}
+
+class MovimentoL extends Movimento {
+    public MovimentoL() {
+        super(Tipo.L);
+        deslocaLinhas = true;
+        deslocaColunas = true;
+    }
+
+    @Override
+    protected boolean validarDistanciasColunasLinhas(int distanciaColunas, int distanciaLinhas) {
+        return (distanciaColunas == 2 && distanciaLinhas == 1) || (distanciaColunas == 1 && distanciaLinhas == 2);
+    }
+
+    @Override
+    public List<String> getCasasIntermediarias(String idCasaOrigem, String idCasaDestino, Xadrez xadrez) {
+        return new ArrayList<String>();
+    }
+    
+    @Override
+    protected int[] getLinhasMovimentos(Cor corPecaOrigem) {
+        return new int[] {1, -1, 1, -1, 2, -2, 2, -2};
+    }
+
+    @Override
+    protected int[] getColunasMovimentos(Cor corPecaOrigem) {
+        return new int[] {2, 2, -2, -2, 1, 1, -1, -1};
+    }
+}
+
+class MovimentoRestrito extends Movimento {
+    public MovimentoRestrito() {
+        super(Tipo.Restrito);
+        deslocaLinhas = true;
+        deslocaColunas = true;
+     }
+
+    @Override
+    protected boolean validarDistanciasColunasLinhas(int distanciaColunas, int distanciaLinhas) {
+        return distanciaColunas <= 1 && distanciaLinhas <= 1;
+    }
+
+    @Override
+    public List<String> getCasasIntermediarias(String idCasaOrigem, String idCasaDestino, Xadrez xadrez) {
+        return new ArrayList<String>();
+    }
+
+    @Override
+    protected int[] getLinhasMovimentos(Cor corPecaOrigem) {
+        return new int[] {1, 1, 1, 0, 0, -1, -1, -1};
+    }
+
+    @Override
+    protected int[] getColunasMovimentos(Cor corPecaOrigem) {
+        return new int[] {-1, 0, 1, -1, 1, -1, 0, 1};
+    }
+
+}
+
+class MovimentoVerticalLivre extends Movimento {
+    public MovimentoVerticalLivre() {
+        super(Tipo.VerticalLivre);
+        deslocaLinhas = true;
+        deslocaColunas = false;
+    }
+
+    @Override
+    protected boolean validarDistanciasColunasLinhas(int distanciaColunas, int distanciaLinhas) {
+        return distanciaColunas == 0;
+    }
+
+    @Override
+    protected int[] getLinhasMovimentos(Cor corPecaOrigem) {
+        return new int[] { 1, 2, 3, 4, 5, 6, 7, -1, -2, -3, -4, -5, -6, -7 };
+    }
+
+    @Override
+    protected int[] getColunasMovimentos(Cor corPecaOrigem) {
+        return new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+    }
+
+}
