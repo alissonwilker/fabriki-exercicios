@@ -1,0 +1,4 @@
+media = 6,3
+nota 1 = 6,0
+nota 2 = 6,0
+nota 3 = 7,0
