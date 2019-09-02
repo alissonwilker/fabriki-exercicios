@@ -1,0 +1,25 @@
+import java.io.PrintStream;
+import java.math.BigInteger;
+import java.util.Scanner;
+
+public class Fatorial {
+	private static Scanner entrada = new Scanner (System.in);
+	private static PrintStream saida = System.out;
+	
+	public static void main (String[]args) {
+		
+		BigInteger mult= BigInteger.valueOf(1);
+		int n;
+		int i;
+		n = entrada.nextInt();
+		i = n-1;
+		
+		for(i = n; i>=1; i--) {
+				//mult = n * i;
+				//n = mult;
+			mult = mult.multiply(BigInteger.valueOf(i));
+		}
+		saida.println(mult);
+
+	}
+}
