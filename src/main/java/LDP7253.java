@@ -1,0 +1,18 @@
+
+import java.io.PrintStream;
+import java.util.Scanner;
+
+public class LDP7253 {
+	private static Scanner entrada = new Scanner(System.in);
+	private static PrintStream saida = System.out;
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		int[] n = new int[100];
+		for(int i = 0; i < n.length; i++) {
+			if(i % 10 == 0) {
+				saida.println("Multiplo de 10");
+			}
+		}
+	}
+
+}
