@@ -36,8 +36,8 @@ executarTestesEntradaESaida() {
 }
 
 executarTestesIntegracao() {
-	wget https://github.com/mozilla/geckodriver/releases/download/v0.20.1/geckodriver-v0.20.1-linux64.tar.gz;
-	tar -xzf geckodriver-v0.20.1-linux64.tar.gz -C .;
+	wget https://github.com/mozilla/geckodriver/releases/download/v0.25.0/geckodriver-v0.25.0-linux64.tar.gz;
+	tar -xzf geckodriver-v0.25.0-linux64.tar.gz -C .;
 	export PATH=$PATH:.;
 	mvn compile
 	if [ "$?" -ne 0 ]; then
