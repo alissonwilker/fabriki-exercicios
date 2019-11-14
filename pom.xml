@@ -246,14 +246,11 @@
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
 		<!-- versoes das dependencias -->
-		<hibernate.version>5.2.2.Final</hibernate.version>
 		<wildfly.version>11.0.0.CR1</wildfly.version>
 		<shrinkwrap-resolver-bom.version>3.1.3</shrinkwrap-resolver-bom.version>
 		<spring-boot-dependencies.version>2.1.7.RELEASE</spring-boot-dependencies.version>
 		<arquillian-bom.version>1.4.0.Final</arquillian-bom.version>
 		<com.google-guava.version>21.0</com.google-guava.version>
-		<selenium-firefox-driver.version>3.12.0</selenium-firefox-driver.version>
-		<selenium-htmlunit-driver.version>2.30.1</selenium-htmlunit-driver.version>
 		<weld-servlet.version>2.4.7.Final</weld-servlet.version>
 		<wildfly-arquillian-container.version>2.1.0.Final</wildfly-arquillian-container.version>
 
