@@ -7,7 +7,7 @@ import java.util.Scanner;
 public class MediaNotas.java {
 
     public static void main(String[] args) {
-        Scanner leitor = new Scanner(System.in);
+        Scanner scanner = new Scanner(System.in);
         int qtdeNotas = scanner.nextInt();
 
         List<Integer> notas = new ArrayList<>();
@@ -27,7 +27,7 @@ public class MediaNotas.java {
         
         System.out.println("media = " + formatador.format(media));
         for (int i = 0; i < qtdeNotas; i++) {
-            System.out.println("nota =" + (i+1) + " = " + formatador.format(notas.get(i)));
+            System.out.println("nota " + (i+1) + " = " + formatador.format(notas.get(i)));
         }
 
         
