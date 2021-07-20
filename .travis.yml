@@ -1,0 +1,18 @@
+language: java
+install: true
+env:
+- MOZ_HEADLESS=1
+addons:
+firefox: latest
+script:
+- export TESTES_SUCESSO=0
+- export TOTAL_TESTES=0
+- export RESULTADO_TESTES=0
+- source ./resources/scripts/validador.sh executarTestesEntradaESaida LDP7251
+cache:
+  directories:
+  - $HOME/.m2
+after_success:
+- curl -k -X GET "http://www.fabriki.org/ResultadoValidacao?totalTestes=$TOTAL_TESTES&testesSucesso=$TESTES_SUCESSO&resultadoTestes=$RESULTADO_TESTES&resultadoValidacao=$TRAVIS_TEST_RESULT&pullRequestNumber=$TRAVIS_PULL_REQUEST&pullRequestOriginBranch=$TRAVIS_PULL_REQUEST_BRANCH&travisBuildId=$TRAVIS_BUILD_ID"
+after_failure:
+- curl -k -X GET "http://www.fabriki.org/ResultadoValidacao?totalTestes=$TOTAL_TESTES&testesSucesso=$TESTES_SUCESSO&resultadoTestes=$RESULTADO_TESTES&resultadoValidacao=$TRAVIS_TEST_RESULT&pullRequestNumber=$TRAVIS_PULL_REQUEST&pullRequestOriginBranch=$TRAVIS_PULL_REQUEST_BRANCH&travisBuildId=$TRAVIS_BUILD_ID"
