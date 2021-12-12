@@ -1,0 +1,39 @@
+public class ContaBancaria {
+	private static int contador;
+	private int id = contador;
+	private int saldo;
+	private Cliente cliente;
+	
+	public ContaBancaria(Cliente pessoaFisica) {
+		contador++;
+	}
+
+	public Object getSaldo() {
+		return saldo;
+	}
+
+	public void depositar(int valorDeposito) {
+		if (valorDeposito>=0) {
+			saldo = saldo + valorDeposito;
+		}
+
+		
+	}
+
+	public void sacar(int valorSaque) {
+		if (valorSaque>=0 && valorSaque<=saldo) {
+			saldo = saldo - valorSaque;
+		}
+
+		
+	}
+
+	public Object getCliente() {
+		return cliente.nome;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+}
