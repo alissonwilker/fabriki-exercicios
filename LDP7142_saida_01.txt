@@ -1,0 +1,3 @@
+codigo = 1
+salarioExcedente = 600
+salarioTotal = 1100
