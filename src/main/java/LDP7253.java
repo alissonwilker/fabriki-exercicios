@@ -1,0 +1,11 @@
+public class LDP7253 {
+	public class Multiplos10 {
+		/** * @param args */ 
+		public static void main(String[] args)
+		{ for (int i = 0; i <= 100; ++i)
+		{ System.out.println(i % 10 == 0 ? i + " - Multiplo de 10" : i); 
+		}
+		}
+		}
+
+}
