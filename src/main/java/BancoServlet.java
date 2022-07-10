@@ -1,0 +1,92 @@
+
+import java.io.IOException;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+
+import java.io.*;
+import java.net.*;
+import javax.servlet.*;
+import javax.servlet.http.*;
+
+
+/**
+ * Servlet implementation class Controlador
+ */
+@WebServlet("/BancoServlet")
+public class BancoServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+
+	
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
+    // @Override
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		PrintWriter out = response.getWriter();
+		String nome = request.getParameter("nomeCliente");
+		String tipoCliente = request.getParameter("tipoCliente");
+		String cpfCnpj = request.getParameter("cpfCnpj");
+		String operacao = request.getParameter("operacao");
+		String valorDeposito = request.getParameter("valorDeposito");
+		String valorSaque = request.getParameter("valorSaque");
+		
+		if(tipoCliente == "tipoClientePessoaFisica"){
+			Cliente cliente = new PessoaFisica(nome, cpfCnpj);
+		} else if(tipoCliente == "tipoClientePessoaJuridica"){
+			Cliente cliente = new PessoaJuridica(nome, cpfCnpj);
+		}
+
+		ContaBancaria cb = new ContaBancaria(cliente);
+
+		switch (operacao) {
+			case "operacaoRecuperarNomeCliente":
+				out.println("<div id='resposta'>" + cliente.getNome() + "</div>");
+				break;
+			case "operacaoRecuperarCpfCliente":
+				try {
+					out.println("<div id='resposta'>" + cliente.getCpf() + "</div>");
+				} catch (Exception e) {
+				}
+				break;
+			case "operacaoRecuperarCnpjCliente":
+				try {
+					out.println("<div id='resposta'>" + cliente.getCnpj() + "</div>");
+				} catch (Exception e) {
+				}
+				break;
+			case "operacaoRecuperarSaldo":
+				out.println("<div id='resposta'>" + cb.getSaldo() + "</div>" );
+				break;
+			case "operacaoDepositarValor":
+				cb.depositar(valorDeposito);
+				out.println("<div id='resposta'>" + cb.getSaldo()  + "</div>");
+				break;
+			case "operacaoSacarValor":
+				cb.sacar(valorSaque);
+				out.println("<div id='resposta'>" + cb.getSaldo() + "</div>");
+				break;
+			case "operacaoDepositarSacarValor":
+				cb.depositar(valorDeposito);
+				cb.sacar(valorSaque);
+				break;
+		
+			default:
+				break;
+		}
+
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// out.println("AQI");
+		doGet(request, response);
+	}
+
+}
